@@ -17,19 +17,29 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 // Handles POST request with new user data
 // The only thing different from this and every other post we've seen
 // is that the password gets encrypted before being inserted
-router.post('/register', (req, res, next) => {
+router.post("/register", async (req, res, next) => {
   const username = req.body.username;
   const password = encryptLib.encryptPassword(req.body.password);
-
-  const queryText = `INSERT INTO "user" (username, password)
+  const connection = await pool.connect();
+  try {
+    await connection.query("BEGIN");
+    const queryText = `INSERT INTO "user" (username, password)
     VALUES ($1, $2) RETURNING id`;
-  pool
-    .query(queryText, [username, password])
-    .then(() => res.sendStatus(201))
-    .catch((err) => {
-      console.log('User registration failed: ', err);
-      res.sendStatus(500);
-    });
+    const result = await connection.query(queryText, [username, password]);
+    const newUser = result.rows[0].id;
+    //Adding rows to "bills"
+    const moreBills = `INSERT INTO "bills" (user_id) VALUES ($1);`;
+    await connection.query(moreBills, [newUser]);
+    //Committing all of the posts
+    await connection.query("COMMIT");
+    res.sendStatus(200);
+  } catch (error) {
+    await connection.query("ROLLBACK");
+    console.log(`Error adding newUser - Rolling back transfer`, error);
+    res.sendStatus(500);
+  } finally {
+    connection.release();
+  }
 });
 
 // Handles login form authenticate/login POST

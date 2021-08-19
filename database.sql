@@ -27,4 +27,6 @@ CREATE TABLE "bills" (
     "trash" INT (100) DEFAULT 0,
     "dog_food" INT (100) DEFAULT 0,
     "gym" INT (100) DEFAULT 0,
+    "other" INT (100) DEFAULT 0,
+    "user_id" INT REFERENCES "user"
 )
