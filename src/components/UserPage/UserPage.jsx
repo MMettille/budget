@@ -22,7 +22,7 @@ function UserPage() {
   const bills = useSelector((store) => store.bills);
   // ⬇ On page load, fetch the categories from the database
   useEffect(() => {
-    dispatch({ type: "FETCH_BILLS" });
+    dispatch({ type: "FETCH_BILL" });
   }, []);
 
   return (
