@@ -3,15 +3,12 @@ import LogOutButton from "../LogOutButton/LogOutButton";
 import { useDispatch, useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 
-import TextField from "@material-ui/core/TextField";
 import OutlinedInput from "@material-ui/core/OutlinedInput";
 import InputLabel from "@material-ui/core/InputLabel";
 import InputAdornment from "@material-ui/core/InputAdornment";
-import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
 import Button from "@material-ui/core/Button";
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
+
 const useStyles = makeStyles((theme) => ({
   margin: {
     margin: theme.spacing(1),
@@ -44,13 +41,14 @@ function UserPage() {
     dispatch({
       type: "ADD_NEW_BILL",
       payload: {
-        taskName: newTask,
-        color_id: value,
+        bill_name: newBill,
+        amount: newAmount,
       },
     });
-    // ⬇ Reset the newTask to an empty string and the value to 10
-    setNewTask("");
-    setValue(10);
+    // ⬇ Reset the variables to an empty string
+    setNewBill("");
+    setNewAmount("");
+    setNewDate("");
   };
 
   return (
