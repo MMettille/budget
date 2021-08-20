@@ -11,22 +11,8 @@ CREATE TABLE "user" (
 
 CREATE TABLE "bills" (
     "id" SERIAL PRIMARY KEY,
-    "mortgage_rent" INT (100) DEFAULT 0,
-    "car_loan" INT (100) DEFAULT 0,
-    "furnace_loan" INT (100) DEFAULT 0,
-    "prime_loan" INT (100) DEFAULT 0,
-    "smaller_credit_card" INT (100) DEFAULT 0,
-    "bigger_credit_card" INT (100) DEFAULT 0,
-    "partner_credit_card" INT (100) DEFAULT 0,
-    "groceries" INT (100) DEFAULT 0,
-    "gas_car" INT (100) DEFAULT 0,
-    "gas_home" INT (100) DEFAULT 0,
-    "electric" INT (100) DEFAULT 0,
-    "auto_home_insurance" INT (100) DEFAULT 0,
-    "internet" INT (100) DEFAULT 0,
-    "trash" INT (100) DEFAULT 0,
-    "dog_food" INT (100) DEFAULT 0,
-    "gym" INT (100) DEFAULT 0,
-    "other" INT (100) DEFAULT 0,
+    "bill_name" VARCHAR (100) NOT NULL,
+    "amount" INT NOT NULL,
+    "date_due" DATE,
     "user_id" INT REFERENCES "user"
-)
+);
