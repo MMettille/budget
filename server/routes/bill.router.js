@@ -38,4 +38,27 @@ router.get('/', rejectUnauthenticated, (req, res) => {
       });
   });
 
+  /**
+ * PUT routes
+ */
+router.put("/:id", rejectUnauthenticated, (req, res) => {
+    // ⬇ This will update this single task
+    const sqlText = `UPDATE "bills" SET "bill_name" = $1, "amount" = $2 WHERE id = $3 AND "user_id" = $4;`;
+    pool
+      .query(sqlText, [
+        req.body.bill_name,
+        req.body.amount,
+        req.body.id,
+        req.user.id,
+      ])
+      // ⬇ Sending back a 'ok' code to the user
+      .then((result) => {
+        res.sendStatus(200);
+      })
+      .catch((error) => {
+        console.log(`Error making database query ${sqlText}`, error);
+        res.sendStatus(500);
+      });
+  });
+
 module.exports = router;

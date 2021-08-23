@@ -33,44 +33,15 @@ function UserBillList({ bill }) {
   const dispatch = useDispatch();
   const classes = useStyles();
   const [isEditMode, setIsEditMode] = useState(false);
-  const [editThis, setEditThis] = useState('');
-    const billToEdit = useSelector(store => store.billToEdit)
+  const [toEdit, setToEdit] = useState(bill);
+
   const onToggleEditMode = (bill) => {
     setIsEditMode(!isEditMode);
-    dispatch({
-        type: 'BILL_TO_EDIT',
-        payload: bill
-    })
   };
 
-  const CustomTableCell = ({ row, name, type, onChange }) => {
-    return (
-      <TableCell align="left" className={classes.tableCell}>
-        {isEditMode ? (
-          <Input
-            value={name}
-            name={name}
-            onChange={(event) =>
-                dispatch({
-                  type: "EDIT_ONCHANGE",
-                  payload: {
-                    property: type,
-                    value: event.target.value,
-                  },
-                })
-              }
-            className={classes.input}
-          />
-        ) : (
-          name
-        )}
-      </TableCell>
-    );
-  };
-
-  const handleChange = (e, bill) => {
-    console.log("changing...", bill);
-
+  const handleSubmit = (event) => {
+    dispatch({ type: "EDIT_BILL", payload: toEdit });
+    onToggleEditMode();
   };
 
   return (
@@ -78,10 +49,7 @@ function UserBillList({ bill }) {
       <TableCell className={classes.selectTableCell}>
         {isEditMode ? (
           <>
-            <IconButton
-              aria-label="done"
-              onClick={() => onToggleEditMode(bill)}
-            >
+            <IconButton aria-label="done" onClick={handleSubmit}>
               <DoneAllIcon />
             </IconButton>
             <IconButton aria-label="revert" onClick={() => onRevert(bill)}>
@@ -97,8 +65,32 @@ function UserBillList({ bill }) {
           </IconButton>
         )}
       </TableCell>
-      <CustomTableCell name={bill.bill_name} type="bill_name" />
-      <CustomTableCell name={bill.amount} type="amount"/>
+      <TableCell align="left" className={classes.tableCell}>
+        {isEditMode ? (
+          <Input
+            value={toEdit.bill_name}
+            onChange={(event) =>
+              setToEdit({ ...bill, bill_name: event.target.value })
+            }
+            className={classes.input}
+          />
+        ) : (
+          bill.bill_name
+        )}
+      </TableCell>
+      <TableCell align="left" className={classes.tableCell}>
+        {isEditMode ? (
+          <Input
+            value={toEdit.amount}
+            onChange={(event) =>
+              setToEdit({ ...bill, amount: event.target.value })
+            }
+            className={classes.input}
+          />
+        ) : (
+          bill.amount
+        )}
+      </TableCell>
     </TableRow>
   );
 }

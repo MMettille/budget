@@ -20,9 +20,22 @@ function* addNewBill(action) {
     }
   }
 
+  // ⬇ Editing the bill in the database
+function* editBill(action) {
+    const editId = action.payload.id;
+     try {
+         yield axios.put(`/api/bill/{editId}`, action.payload);
+         // ⬇ Refresh the tasks
+        yield put({ type: 'FETCH_BILL'})
+     } catch {
+     console.log('error in put task');
+     }
+  }
+
 function* billSaga() {
   yield takeLatest('FETCH_BILL', fetchBill);
   yield takeLatest('ADD_NEW_BILL', addNewBill);
+  yield takeLatest('EDIT_BILL', editBill);
 }
 
 export default billSaga;
