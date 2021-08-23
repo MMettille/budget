@@ -33,20 +33,32 @@ function UserBillList({ bill }) {
   const dispatch = useDispatch();
   const classes = useStyles();
   const [isEditMode, setIsEditMode] = useState(false);
-  console.log("item...", bill);
-
-  const onToggleEditMode = (id) => {
+  const [editThis, setEditThis] = useState('');
+    const billToEdit = useSelector(store => store.billToEdit)
+  const onToggleEditMode = (bill) => {
     setIsEditMode(!isEditMode);
+    dispatch({
+        type: 'BILL_TO_EDIT',
+        payload: bill
+    })
   };
 
-  const CustomTableCell = ({ row, name, onChange }) => {
+  const CustomTableCell = ({ row, name, type, onChange }) => {
     return (
       <TableCell align="left" className={classes.tableCell}>
         {isEditMode ? (
           <Input
             value={name}
             name={name}
-            onChange={(e) => handleChange(e, bill)}
+            onChange={(event) =>
+                dispatch({
+                  type: "EDIT_ONCHANGE",
+                  payload: {
+                    property: type,
+                    value: event.target.value,
+                  },
+                })
+              }
             className={classes.input}
           />
         ) : (
@@ -58,6 +70,7 @@ function UserBillList({ bill }) {
 
   const handleChange = (e, bill) => {
     console.log("changing...", bill);
+
   };
 
   return (
@@ -84,8 +97,8 @@ function UserBillList({ bill }) {
           </IconButton>
         )}
       </TableCell>
-      <CustomTableCell name={bill.bill_name} />
-      <CustomTableCell name={bill.amount} />
+      <CustomTableCell name={bill.bill_name} type="bill_name" />
+      <CustomTableCell name={bill.amount} type="amount"/>
     </TableRow>
   );
 }

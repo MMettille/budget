@@ -14,7 +14,7 @@ function* fetchBill() {
 function* addNewBill(action) {
     try {
       const response = yield axios.post('/api/bill/newBill', action.payload )
-      yield put({ type: 'SET_BILL' });
+      yield put({ type: 'FETCH_BILL' })
     } catch (error) {
       console.log('User get bill failed', error);
     }
