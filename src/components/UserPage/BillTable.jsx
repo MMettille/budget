@@ -29,7 +29,6 @@ function BillTable({ item }) {
   console.log("item...", item);
 
   return (
-    <div>
       <TableContainer component={Paper} className={classes.table}>
         <Table className={classes.table} aria-label="simple table">
           <TableHead>
@@ -41,12 +40,11 @@ function BillTable({ item }) {
           </TableHead>
           <TableBody>
             {item.map((bill) => {
-              return <UserBillList key={item.id} bill={bill} />;
+              return <UserBillList key={bill.id} bill={bill} />;
             })}
           </TableBody>
         </Table>
       </TableContainer>
-    </div>
   );
 }
 

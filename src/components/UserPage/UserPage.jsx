@@ -82,7 +82,7 @@ function UserPage() {
         <Button type="submit">Add</Button>
       </form>
       <div className="list">
-        <BillTable item={item} />
+        <BillTable key={item} item={item} />
       </div>
     </div>
   );
