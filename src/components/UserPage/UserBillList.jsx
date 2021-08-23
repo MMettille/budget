@@ -3,11 +3,8 @@ import LogOutButton from "../LogOutButton/LogOutButton";
 import { useDispatch, useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 
-import OutlinedInput from "@material-ui/core/OutlinedInput";
-import InputLabel from "@material-ui/core/InputLabel";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import FormControl from "@material-ui/core/FormControl";
-import Button from "@material-ui/core/Button";
+import TableRow from "@material-ui/core/TableRow";
+import TableCell from "@material-ui/core/TableCell";
 
 const useStyles = makeStyles((theme) => ({
   margin: {
@@ -26,30 +23,23 @@ function UserBillList({ bill }) {
   console.log("item...", bill);
 
   return (
-    <div>
-      <form>
-        <FormControl variant="outlined" className={classes.margin}>
-          <InputLabel htmlFor="new-amount">Bill</InputLabel>
-          <OutlinedInput
-            id="new-amount"
+    <div className="table-input">
+      <TableRow key={bill.id}>
+        <TableCell component="th" scope="row">
+          <input
+            type="text"
             value={bill.bill_name}
             // onChange={(event) => setNewBill(event.target.value)}
-            labelWidth={60}
-            startAdornment={<InputAdornment position="start"></InputAdornment>}
           />
-        </FormControl>
-        <FormControl variant="outlined" className={classes.margin}>
-          <InputLabel htmlFor="new-amount">Amount</InputLabel>
-          <OutlinedInput
-            id="new-amount"
+        </TableCell>
+        <TableCell align="right">
+          <input
+            type="text"
             value={bill.amount}
             // onChange={(event) => setNewAmount(event.target.value)}
-            startAdornment={<InputAdornment position="start">$</InputAdornment>}
-            labelWidth={60}
-            type="number"
           />
-        </FormControl>
-      </form>
+        </TableCell>
+      </TableRow>
     </div>
   );
 }
