@@ -11,14 +11,14 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 
-import UserBillList from './UserBillList'
+import UserBillList from "./UserBillList";
 const useStyles = makeStyles({
   table: {
-    maxWidth: 500,
+    maxWidth: 700,
   },
   tableCell: {
     width: 130,
-    height: 40
+    height: 40,
   },
 });
 
@@ -34,14 +34,14 @@ function BillTable({ item }) {
         <Table className={classes.table} aria-label="simple table">
           <TableHead>
             <TableRow>
-            <TableCell align="left" />
-              <TableCell>Name</TableCell>
-              <TableCell>Amount</TableCell>
+              <TableCell align="left" />
+              <TableCell align="left">Name</TableCell>
+              <TableCell align="left">Amount</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {item.map((bill) => {
-              return <UserBillList key={item.id} bill={bill} />
+              return <UserBillList key={item.id} bill={bill} />;
             })}
           </TableBody>
         </Table>
