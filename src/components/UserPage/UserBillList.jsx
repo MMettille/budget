@@ -19,11 +19,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function UserBillList({ item }) {
+function UserBillList({ bill }) {
   // ⬇ What functions we need to use in this component
   const dispatch = useDispatch();
   const classes = useStyles();
-  console.log("item...", item);
+  console.log("item...", bill);
 
   return (
     <div>
@@ -32,7 +32,7 @@ function UserBillList({ item }) {
           <InputLabel htmlFor="new-amount">Bill</InputLabel>
           <OutlinedInput
             id="new-amount"
-            value={item.bill_name}
+            value={bill.bill_name}
             // onChange={(event) => setNewBill(event.target.value)}
             labelWidth={60}
             startAdornment={<InputAdornment position="start"></InputAdornment>}
@@ -42,7 +42,7 @@ function UserBillList({ item }) {
           <InputLabel htmlFor="new-amount">Amount</InputLabel>
           <OutlinedInput
             id="new-amount"
-            value={item.amount}
+            value={bill.amount}
             // onChange={(event) => setNewAmount(event.target.value)}
             startAdornment={<InputAdornment position="start">$</InputAdornment>}
             labelWidth={60}

@@ -9,7 +9,8 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import FormControl from "@material-ui/core/FormControl";
 import Button from "@material-ui/core/Button";
 
-import UserBillList from "./UserBillList"
+import BillTable from "./BillTable";
+import "./UserPage.css";
 
 const useStyles = makeStyles((theme) => ({
   margin: {
@@ -31,7 +32,7 @@ function UserPage() {
   const [newAmount, setNewAmount] = useState("");
   const [newDate, setNewDate] = useState("");
   //! Not sure why this is happening
-  const bill = bills.bill;
+  const item = bills.bill;
   // ⬇ On page load, fetch the categories from the database
   useEffect(() => {
     dispatch({ type: "FETCH_BILL" });
@@ -56,11 +57,6 @@ function UserPage() {
 
   return (
     <div className="container">
-      {bill.map((item) => {
-        return (
-          <UserBillList key={item.id} item={item}/>
-        )
-      })}
       <form onSubmit={handleSubmit}>
         <FormControl variant="outlined" className={classes.margin}>
           <InputLabel htmlFor="new-amount">Bill</InputLabel>
@@ -85,6 +81,9 @@ function UserPage() {
         </FormControl>
         <Button type="submit">Add</Button>
       </form>
+      <div className="list">
+        <BillTable item={item} />
+      </div>
     </div>
   );
 }
