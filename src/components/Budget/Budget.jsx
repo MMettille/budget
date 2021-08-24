@@ -7,7 +7,7 @@ import "./UserPage.css";
 import MonthlyExpenseCalculator from './MontlyExpenseCalculator'
 import AddBill from './AddBill';
 
-function UserPage() {
+function Budget() {
   return (
     <div className="container">
       <MonthlyExpenseCalculator />
@@ -18,4 +18,4 @@ function UserPage() {
 }
 
 // this allows us to use <App /> in index.js
-export default UserPage;
+export default Budget;
