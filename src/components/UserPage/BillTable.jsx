@@ -36,6 +36,7 @@ function BillTable({ item }) {
               <TableCell align="left" />
               <TableCell align="left">Name</TableCell>
               <TableCell align="left">Amount</TableCell>
+              <TableCell align="left"></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

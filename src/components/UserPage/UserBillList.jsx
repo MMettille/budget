@@ -10,6 +10,7 @@ import Input from "@material-ui/core/Input";
 import IconButton from "@material-ui/core/IconButton";
 import DoneAllIcon from "@material-ui/icons/DoneAll";
 import RevertIcon from "@material-ui/icons/NotInterestedOutlined";
+import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 
 const useStyles = makeStyles((theme) => ({
   margin: {
@@ -39,11 +40,15 @@ function UserBillList({ bill }) {
     setIsEditMode(!isEditMode);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = () => {
     dispatch({ type: "EDIT_BILL", payload: toEdit });
     onToggleEditMode();
   };
 
+  const handleDelete = () => {
+      dispatch({ type: "DELETE_BILL", payload: bill })
+  }
+  
   return (
     <TableRow key={bill.id}>
       <TableCell className={classes.selectTableCell}>
@@ -89,6 +94,17 @@ function UserBillList({ bill }) {
           />
         ) : (
           bill.amount
+        )}
+      </TableCell>
+      <TableCell>
+      {isEditMode ? (
+          <>
+            <IconButton aria-label="done" onClick={handleDelete}>
+              <DeleteOutlineIcon />
+            </IconButton>
+          </>
+        ) : (
+          <></>
         )}
       </TableCell>
     </TableRow>

@@ -41,8 +41,8 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   /**
  * PUT routes
  */
-router.put("/:id", rejectUnauthenticated, (req, res) => {
-    // ⬇ This will update this single task
+router.put("/edit/:id", rejectUnauthenticated, (req, res) => {
+    // ⬇ This will update this single bill
     const sqlText = `UPDATE "bills" SET "bill_name" = $1, "amount" = $2 WHERE id = $3 AND "user_id" = $4;`;
     pool
       .query(sqlText, [
@@ -60,5 +60,18 @@ router.put("/:id", rejectUnauthenticated, (req, res) => {
         res.sendStatus(500);
       });
   });
+
+  router.delete("/:id", rejectUnauthenticated, (req, res) => {
+      const sqlText = `DELETE FROM "bills" WHERE "id" = $1 and "user_id" = $2;`
+      pool.query(sqlText, [req.params.id, req.user.id])
+      // ⬇ Sending back a 'ok' code to the user
+    .then((response) => {
+        res.sendStatus(200);
+      })
+      .catch((error) => {
+        console.log(`error deleting on server side`, error);
+        res.sendStatus(500);
+      });
+  })
 
 module.exports = router;
