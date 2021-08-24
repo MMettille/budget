@@ -1,5 +1,10 @@
 .list{
-    margin-top: 5%;
+    width: 50%;
+    margin: auto;
+}
+
+.form{
+    margin-bottom: 3%;
 }
 
 .table-input input{

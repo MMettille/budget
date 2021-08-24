@@ -11,7 +11,7 @@ import Button from "@material-ui/core/Button";
 
 import BillTable from "./BillTable";
 import "./UserPage.css";
-
+import MonthlyExpenseCalculator from './MontlyExpenseCalculator'
 const useStyles = makeStyles((theme) => ({
   margin: {
     margin: theme.spacing(1),
@@ -57,6 +57,8 @@ function UserPage() {
 
   return (
     <div className="container">
+      <MonthlyExpenseCalculator />
+      <div className="form center">
       <form onSubmit={handleSubmit}>
         <FormControl variant="outlined" className={classes.margin}>
           <InputLabel htmlFor="new-amount">Bill</InputLabel>
@@ -81,6 +83,7 @@ function UserPage() {
         </FormControl>
         <Button type="submit">Add</Button>
       </form>
+      </div>
       <div className="list">
         <BillTable key={item} item={item} />
       </div>

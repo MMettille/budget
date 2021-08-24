@@ -14,7 +14,7 @@ import Paper from "@material-ui/core/Paper";
 import UserBillList from "./UserBillList";
 const useStyles = makeStyles({
   table: {
-    maxWidth: 700,
+    maxWidth: '100%',
   },
   tableCell: {
     width: 130,
