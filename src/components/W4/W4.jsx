@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 
 import Tax from './Tax'
-import Minnesota from './Minnesota'
+import Salary from './Salary'
 
 function W4() {
   // Using hooks we're creating local state for a "heading" variable with
@@ -10,6 +10,7 @@ function W4() {
 
   return (
     <div>
+      <Salary />
       <Tax />
     </div>
   );

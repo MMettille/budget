@@ -22,6 +22,9 @@ const useStyles = makeStyles((theme) => ({
   selectEmpty: {
     marginTop: theme.spacing(2),
   },
+  margin: {
+    margin: theme.spacing(1),
+  },
 }));
 
 function Tax() {
@@ -32,10 +35,10 @@ function Tax() {
   const [dependents, setDependents] = useState(1);
   const [allowances, setAllowances] = useState(1);
 
-  console.log(maritalStatus);
   return (
-    <div className="container">
-      <h3>Step 1: Marital Status</h3>
+    <div className="container tax-box">
+      <h3>Federal</h3>
+      <h5>Marital Status</h5>
       <form>
         <FormControl component="fieldset">
           <FormLabel component="legend">Marital Status</FormLabel>
@@ -58,7 +61,7 @@ function Tax() {
             />
           </RadioGroup>
         </FormControl>
-        <h3>Step 2: Claim Dependents</h3>
+        <h5>Claim Dependents</h5>
         <p>If your total income will be $200,000 or less ($400,000 if married filing jointly):</p>
       <FormControl variant="outlined" className={classes.margin}>
           <InputLabel htmlFor="new-amount">Number of dependents</InputLabel>
