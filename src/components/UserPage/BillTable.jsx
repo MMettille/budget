@@ -26,9 +26,8 @@ function BillTable() {
   // ⬇ What functions we need to use in this component
   const dispatch = useDispatch();
   const classes = useStyles();
-  const bills = useSelector((store) => store.bill);
-  //! Not sure why this is happening
-  const item = bills.bill;
+  const item = useSelector((store) => store.bill);
+  const bills = item.bill;
   // ⬇ On page load, fetch the categories from the database
   useEffect(() => {
     dispatch({ type: "FETCH_BILL" });
@@ -47,7 +46,7 @@ function BillTable() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {item.map((bill) => {
+            {bills.map((bill) => {
               return <UserBillList key={bill.id} bill={bill} />;
             })}
           </TableBody>

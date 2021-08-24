@@ -3,17 +3,16 @@ import { useDispatch, useSelector } from "react-redux";
 
 function MonthlyExpenseCalculator() {
   const dispatch = useDispatch();
-  const expense = useSelector((store) => store.expense);
+  const item = useSelector((store) => store.bill);
+  const expense = item.expense.total
 
   useEffect(() => {
     dispatch({ type: "FETCH_MONTHLY_EXPENSE" });
   }, []);
 
-  console.log('expense...', expense)
-  
   return (
     <div>
-      <h1 className="center">Your Monthly Expenses:</h1>
+      <h1 className="center">Your Monthly Expenses: ${expense}</h1>
     </div>
   );
 }

@@ -10,7 +10,7 @@ const {
  */
 router.get("/", rejectUnauthenticated, (req, res) => {
   // GET route code here
-  const sqlText = `SELECT * FROM "bills" WHERE "user_id" = $1`;
+  const sqlText = `SELECT * FROM "bills" WHERE "user_id" = $1 ORDER BY "amount" DESC`;
   pool
     .query(sqlText, [req.user.id])
     .then((result) => {
