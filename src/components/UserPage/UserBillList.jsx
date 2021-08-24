@@ -48,65 +48,62 @@ function UserBillList({ bill }) {
   const handleDelete = () => {
       dispatch({ type: "DELETE_BILL", payload: bill })
   }
-  
+
   return (
     <TableRow key={bill.id}>
-      <TableCell className={classes.selectTableCell}>
         {isEditMode ? (
-          <>
-            <IconButton aria-label="done" onClick={handleSubmit}>
-              <DoneAllIcon />
-            </IconButton>
-            <IconButton aria-label="revert" onClick={() => onRevert(bill)}>
-              <RevertIcon />
-            </IconButton>
-          </>
-        ) : (
-          <IconButton
-            aria-label="delete"
-            onClick={() => onToggleEditMode(bill)}
-          >
-            <EditIcon />
-          </IconButton>
-        )}
-      </TableCell>
-      <TableCell align="left" className={classes.tableCell}>
-        {isEditMode ? (
-          <Input
-            value={toEdit.bill_name}
-            onChange={(event) =>
-              setToEdit({ ...bill, bill_name: event.target.value })
-            }
-            className={classes.input}
-          />
-        ) : (
-          bill.bill_name
-        )}
-      </TableCell>
-      <TableCell align="left" className={classes.tableCell}>
-        {isEditMode ? (
-          <Input
-            value={toEdit.amount}
-            onChange={(event) =>
-              setToEdit({ ...bill, amount: event.target.value })
-            }
-            className={classes.input}
-          />
-        ) : (
-          bill.amount
-        )}
-      </TableCell>
-      <TableCell>
-      {isEditMode ? (
-          <>
+            <>
+            <TableCell className={classes.selectTableCell}>
+                <IconButton aria-label="done" onClick={handleSubmit}>
+                    <DoneAllIcon />
+                </IconButton>
+                <IconButton aria-label="revert" onClick={onToggleEditMode}>
+                    <RevertIcon />
+                </IconButton>
+            </TableCell>
+            <TableCell align="left" className={classes.tableCell}>
+                <Input
+                value={toEdit.bill_name}
+                onChange={(event) =>
+                setToEdit({ ...bill, bill_name: event.target.value })
+                }
+                className={classes.input}
+                />
+            </TableCell>
+            <TableCell align="left" className={classes.tableCell}>
+                <Input
+                value={toEdit.amount}
+                onChange={(event) =>
+                setToEdit({ ...bill, amount: event.target.value })
+                }
+                className={classes.input}
+                />
+            </TableCell>
+            <TableCell align="left" className={classes.tableCell}>
             <IconButton aria-label="done" onClick={handleDelete}>
               <DeleteOutlineIcon />
             </IconButton>
-          </>
+            </TableCell>
+            </>
         ) : (
-          <></>
+            <>
+            <TableCell className={classes.selectTableCell}>
+                <IconButton
+                aria-label="edit"
+                onClick={() => onToggleEditMode(bill)}
+                >
+                    <EditIcon />
+                </IconButton>
+            </TableCell>
+            <TableCell align="left" className={classes.tableCell}>
+                {bill.bill_name}
+            </TableCell>
+            <TableCell align="left" className={classes.tableCell}>
+                {bill.amount}
+            </TableCell>
+            <TableCell align="left" className={classes.tableCell}></TableCell>
+            </>
         )}
-      </TableCell>
     </TableRow>
   );
 }
