@@ -14,7 +14,7 @@ import Paper from "@material-ui/core/Paper";
 import UserBillList from "./UserBillList";
 const useStyles = makeStyles({
   table: {
-    maxWidth: '100%',
+    maxWidth: "100%",
   },
   tableCell: {
     width: 130,
@@ -22,13 +22,20 @@ const useStyles = makeStyles({
   },
 });
 
-function BillTable({ item }) {
+function BillTable() {
   // ⬇ What functions we need to use in this component
   const dispatch = useDispatch();
   const classes = useStyles();
-  console.log("item...", item);
+  const bills = useSelector((store) => store.bill);
+  //! Not sure why this is happening
+  const item = bills.bill;
+  // ⬇ On page load, fetch the categories from the database
+  useEffect(() => {
+    dispatch({ type: "FETCH_BILL" });
+  }, []);
 
   return (
+    <div className="bill-table">
       <TableContainer component={Paper} className={classes.table}>
         <Table className={classes.table} aria-label="simple table">
           <TableHead>
@@ -46,6 +53,7 @@ function BillTable({ item }) {
           </TableBody>
         </Table>
       </TableContainer>
+    </div>
   );
 }
 
