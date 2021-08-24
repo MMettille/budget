@@ -15,7 +15,7 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 import AboutPage from '../AboutPage/AboutPage';
 import Budget from '../Budget/Budget';
-import InfoPage from '../InfoPage/InfoPage';
+import W4 from '../W4/W4';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
@@ -63,9 +63,9 @@ function App() {
           <ProtectedRoute
             // logged in shows InfoPage else shows LoginPage
             exact
-            path="/info"
+            path="/w4"
           >
-            <InfoPage />
+            <W4 />
           </ProtectedRoute>
 
           <Route
@@ -75,7 +75,7 @@ function App() {
             {user.id ?
               // If the user is already logged in, 
               // redirect to the /user page
-              <Redirect to="/user" />
+              <Redirect to="/budget" />
               :
               // Otherwise, show the login page
               <LoginPage />
@@ -89,7 +89,7 @@ function App() {
             {user.id ?
               // If the user is already logged in, 
               // redirect them to the /user page
-              <Redirect to="/user" />
+              <Redirect to="/budget" />
               :
               // Otherwise, show the registration page
               <RegisterPage />
@@ -103,7 +103,7 @@ function App() {
             {user.id ?
               // If the user is already logged in, 
               // redirect them to the /user page
-              <Redirect to="/user" />
+              <Redirect to="/budget" />
               :
               // Otherwise, show the Landing page
               <LandingPage />
