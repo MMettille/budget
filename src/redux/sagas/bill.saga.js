@@ -6,11 +6,20 @@ function* fetchBill() {
   try {
     const response = yield axios.get('/api/bill')
     yield put({ type: 'SET_BILL', payload: response.data });
+    yield put({ type: 'FETCH_MONTHLY_EXPENSE' })
   } catch (error) {
     console.log('User get bill failed', error);
   }
 }
 
+function* fetchMonthlyExpense(){
+    try{
+        const response = yield axios.get('api/bill/expense');
+        yield put({ type: 'SET_EXPENSE', payload: response.data })
+    } catch (error) {
+        console.log('User expense failed', error);
+    }
+}
 function* addNewBill(action) {
     try {
       const response = yield axios.post('/api/bill/newBill', action.payload )
@@ -45,6 +54,7 @@ function* deleteBill(action) {
 
 function* billSaga() {
   yield takeLatest('FETCH_BILL', fetchBill);
+  yield takeLatest('FETCH_MONTHLY_EXPENSE', fetchMonthlyExpense)
   yield takeLatest('ADD_NEW_BILL', addNewBill);
   yield takeLatest('EDIT_BILL', editBill);
   yield takeLatest('DELETE_BILL', deleteBill);
